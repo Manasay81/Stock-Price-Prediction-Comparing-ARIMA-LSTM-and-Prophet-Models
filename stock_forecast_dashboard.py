@@ -176,3 +176,8 @@ if run_button:
         _, _, df_bt_lstm = backtest_strategy(df_raw['Close'].values, preds_lstm)
         _, _, df_bt_prophet = backtest_strategy(df_raw['Close'].values, preds_prophet)
         fig_cum = go.Figure()
+    fig_cum.add_trace(go.Scatter(x=df_bt_arima.index, y=df_bt_arima['Cumulative'], name='ARIMA Strategy'))
+    fig_cum.add_trace(go.Scatter(x=df_bt_lstm.index, y=df_bt_lstm['Cumulative'], name='LSTM Strategy'))
+    fig_cum.add_trace(go.Scatter(x=df_bt_prophet.index, y=df_bt_prophet['Cumulative'], name='Prophet Strategy'))
+    fig_cum.update_layout(title='Cumulative Returns Comparison', yaxis_title='Cumulative Returns')
+    st.plotly_chart(fig_cum)
